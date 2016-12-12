@@ -1,0 +1,25 @@
+.pad {
+  display: inline-block;
+  &-left {
+    &:extend(.pad);
+    padding-left: 20px;
+  }
+
+  &-half-left {
+    &:extend(.pad);
+    padding-left: 10px;
+  }
+
+  &-bottom {
+    &:extend(.pad);
+    padding-bottom: 15px;
+  }
+}
+
+.marg {
+  &-quart-right {
+    margin-right: 5px;
+  }
+}
+
+

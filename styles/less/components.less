@@ -1,0 +1,40 @@
+.text {
+
+  &-big {
+    font-size: 16px;
+  }
+
+  &-bold {
+    font-weight: bold;
+  }
+
+}
+
+.icon {
+  padding: 4px;
+  border-radius: 4px;
+  color: @color-beige-base;
+  &.active {
+    background-color: @color-red;
+    border: solid thin @color-red;
+    color: white;
+  }
+  &.inactive {
+    background-color: white;
+    border: solid thin @color-beige-base;
+    color: @color-beige-base;
+
+  }
+}
+
+.widget {
+  border: solid thin #ddd;
+  margin: 0 0 30px 0;
+  padding: 15px 0;
+  background-color: #fafafa;
+}
+
+.form-cont{
+  &:extend(.widget);
+  padding: 15px;
+}

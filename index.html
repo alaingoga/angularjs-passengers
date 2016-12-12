@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Passengers Component</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,700|PT+Sans" rel="stylesheet">
+    <link href="styles/dist/itinerary.min.css" rel="stylesheet">
+
+
+  </head>
+
+  <body>
+
+    <div class="container" ng-app="passenger">
+
+      <h1 class="pt-sans">Itinerary Card</h1>
+      <section class="row section closed">
+        <div class="row">
+          <div class="col-md-6">
+            <span class="glyphicon glyphicon-calendar"></span>
+            <span class="pad-half-left">Flight</span>
+          </div>
+          <div class="col-md-6">
+            <span class="glyphicon glyphicon-plane"></span>
+            <span class="pad-half-left">Aircraft</span>
+            <span class="glyphicon glyphicon-menu-down pull-right"></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="row section open" ng-controller="passengerController as pCtrl">
+        <div class="row">
+          <div class="col-md-8">
+
+            <h2>
+              <span class="glyphicon glyphicon-user icon marg-quart-right"
+                    ng-class="{active: pCtrl.activateIcon($index), inactive: !pCtrl.activateIcon($index)}"
+                    ng-repeat="i in pCtrl.getIconsArray() track by $index">
+              </span>
+
+              <span class="pad-half-left pt-sans">All passengers information</span>
+            </h2>
+
+            <p>Please include full name and date of birth of each passenger.</p>
+            <br>
+
+            <div class="widgets-wrapper">
+              <div class="row text-big widget"
+                   ng-repeat="(i, passenger) in pCtrl.passengers"
+                   ng-hide="pCtrl.hideItem(i)">
+                <div class="col-md-6">
+                  <span class="text-bold">Passenger {{i + 1}}</span>
+                  <span class="pad-left"> {{passenger.prefix + '. ' + passenger.firstName + ' ' + passenger.lastName }}</span>
+                </div>
+                <div class="col-md-6">
+                  <span>Date of Birth: </span>
+                  <span class="pad-half-left">{{ passenger.dob | date : shortDate }}</span>
+
+                  <span class="glyphicon glyphicon-remove pull-right icon"
+                        ng-show="{{i !== 0}}"
+                        ng-click="pCtrl.removeItem(i)">
+
+                  </span>
+                  <span class="glyphicon glyphicon-pencil pull-right icon pad-half-left"
+                        ng-click="pCtrl.editItem(i)"></span>
+                </div>
+              </div>
+
+              <div class="form-cont text-big" ng-show="pCtrl.showForm()">
+                <form class="form" name="passengerForm" ng-submit="pCtrl.add(passengerForm)">
+                  <span class="text-bold pad-bottom">Passenger {{pCtrl.getPassengerEditId()}}</span>
+
+                  <div class="row">
+                    <div class="form-group col-md-2">
+                      <label class="sr-only" for="prefx">Prefix</label>
+                      <input type="text"
+                             class="form-control col-xs-1"
+                             id="prefx" placeholder="Prfx"
+                             ng-model="pCtrl.passengerEdit.prefix" required autofocus>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label class="sr-only" for="firstName">First Name</label>
+                      <input type="text"
+                             class="form-control"
+                             id="firstName"
+                             placeholder="First Name"
+                             ng-model="pCtrl.passengerEdit.firstName" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label class="sr-only" for="lastName">Last Name</label>
+                      <input type="text"
+                             class="form-control"
+                             id="lastName"
+                             placeholder="Last Name"
+                             ng-model="pCtrl.passengerEdit.lastName" required>
+                    </div>
+                  </div>
+
+                  <label for="dob">Date of Birth</label>
+                  <div class="row">
+                    <div class="form-group col-md-4">
+
+                      <input type="date"
+                             class="form-control"
+                             id="dob"
+                             placeholder="Date of Birth"
+                             ng-model="pCtrl.passengerEdit.dob" required>
+                    </div>
+                    <div class="col-md-6">
+                      <button type="button" class="btn btn-default" ng-click="pCtrl.resetEdit()">Cancel</button>
+                      <button type="submit" class="btn btn-primary">Add</button>
+                    </div>
+
+                  </div>
+                </form>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="col-md-4">
+            <h2 class="form-signin-heading pt-sans">Some Directions</h2>
+            <p>
+              This section is active now. The user can enter the data of the rest ot the passengers.
+            </p>
+            <p>
+              The arrows on the corner allow you to work on previews / next sections.
+            </p>
+          </div>
+        </div>
+
+
+      </section>
+
+      <section class="row section closed">
+        <span class="glyphicon glyphicon-list"></span>
+        <span class="pad-half-left">Notes</span>
+        <span class="glyphicon glyphicon-menu-up pull-right"></span>
+      </section>
+    </div> <!-- /container -->
+
+    <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/js/passenger.js"></script>
+    <script src="/js/passenger.controller.js"></script>
+  </body>
+</html>
