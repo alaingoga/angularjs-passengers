@@ -18,7 +18,7 @@ angular.module('passenger.controller',[])
         this.passengers = [
             {
                 'prefix': 'Mr',
-                'firstName': 'Petter ddd',
+                'firstName': 'Petter',
                 'lastName': 'Ross',
                 'dob': new Date(1995, 11, 17)
             }
