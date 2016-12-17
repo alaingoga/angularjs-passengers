@@ -1,5 +1,5 @@
 angular.module('passenger.controller',[])
-    .controller('passengerController', ['$scope', function($scope) {
+    .controller('passengerController', function() {
 
         var getPassengerDefault = function() {
             return {
@@ -75,4 +75,4 @@ angular.module('passenger.controller',[])
             return (typeof this.passengers[item] !== 'undefined');
         }
 
-    }]);
+    });
